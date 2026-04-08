@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  /* Background & Surface */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --surface: #f8fafc;
+  --border: #e2e8f0;
+
+  /* Primary Branding (Modern Indigo/Violet) */
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+
+  /* Accent Colors (For Glow & Highlights) */
+  --accent-cyan: #06b6d4;
+  --accent-purple: #a855f7;
+
+  /* Text Colors */
+  --text-main: #1e293b;
+  --text-muted: #64748b;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+/* Optional: Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    "Inter", sans-serif; /* Make sure to link Inter font in index.html */
+}
