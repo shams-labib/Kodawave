@@ -10,7 +10,7 @@ import {
   Loader2,
   CheckCircle,
 } from "lucide-react";
-import Animation from "../../components/shared/Animation";
+import Animation from "../../Components/shared/Animation";
 
 const ContactPage = () => {
   const form = useRef();
