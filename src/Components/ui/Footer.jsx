@@ -123,7 +123,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Middle Section */}
+        {/* Middle  */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 py-20">
           <div className="col-span-2 md:col-span-1 space-y-6">
             <div className="text-2xl font-black tracking-tighter uppercase italic">
