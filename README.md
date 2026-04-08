@@ -1,4 +1,4 @@
-# 🚀 Kodawave 
+# 🚀 Kodawave
 
 A modern, high-performance React component collection focused on immersive UI/UX. This project demonstrates advanced frontend techniques like **3D sliders**, **infinite motion systems**, and **scroll-based animations** — built with scalability and clean architecture in mind.
 
@@ -134,10 +134,3 @@ src/
 
 **Shams Al Labib**  
 Frontend Developer | Computer Science Student
-
-- 💼 LinkedIn: _(Add your link)_
-- 💻 GitHub: _(Add your link)_
-
----
-
-> Built as a job-focused project to demonstrate real frontend engineering skills — not just UI cloning.
