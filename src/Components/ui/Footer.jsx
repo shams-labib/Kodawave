@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router";
 import {
   FaGithub,
@@ -7,10 +7,67 @@ import {
   FaInstagram,
   FaArrowUpRightFromSquare,
 } from "react-icons/fa6";
-import { HiOutlineMail, HiOutlineArrowRight } from "react-icons/hi";
+import { HiOutlineMail } from "react-icons/hi";
+import { Loader2 } from "lucide-react"; // Import for loading state
+import emailjs from "@emailjs/browser"; // Recommended over 'emailjs-com'
+import Swal from "sweetalert2";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleNewsletter = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // EmailJS Configuration with your specific keys
+    const EMAILJS_CONFIG = {
+      SERVICE_ID: "service_vyedps4",
+      TEMPLATE_ID: "template_gu4xayn",
+      PUBLIC_KEY: "qAo87EgVJLY4cIA-A",
+    };
+
+    emailjs
+      .sendForm(
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
+        form.current,
+        EMAILJS_CONFIG.PUBLIC_KEY,
+      )
+      .then(
+        () => {
+          setIsSubmitting(false);
+          Swal.fire({
+            icon: "success",
+            title: "Subscribed!",
+            text: "Thank you for joining our newsletter.",
+            confirmButtonColor: "#2563eb",
+            background: "#111827", // Modern dark background
+            color: "#fff",
+            customClass: {
+              popup: "rounded-[2rem]",
+            },
+          });
+          e.target.reset();
+        },
+        (error) => {
+          setIsSubmitting(false);
+          console.error("EmailJS Error:", error);
+          Swal.fire({
+            icon: "error",
+            title: "Submission Failed",
+            text: "Please try again later.",
+            confirmButtonColor: "#ef4444",
+            background: "#111827",
+            color: "#fff",
+            customClass: {
+              popup: "rounded-[2rem]",
+            },
+          });
+        },
+      );
+  };
 
   return (
     <footer className="bg-[#0a0a0a] text-white pt-24 pb-12 overflow-hidden">
@@ -38,16 +95,31 @@ const Footer = () => {
             <p className="text-slate-400 font-medium mb-6 text-sm">
               Join our newsletter for weekly engineering insights.
             </p>
-            <div className="relative group">
+
+            <form
+              ref={form}
+              onSubmit={handleNewsletter}
+              className="relative group"
+            >
               <input
+                name="user_email" // Map this in your EmailJS Template
                 type="email"
                 placeholder="Email Address"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-blue-600 transition-all text-sm"
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none focus:border-blue-600 transition-all text-sm pr-16"
               />
-              <button className="absolute right-2 top-2 bottom-2 bg-blue-600 hover:bg-blue-500 px-6 rounded-xl transition-colors flex items-center justify-center">
-                <HiOutlineMail size={20} />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="absolute right-2 top-2 bottom-2 bg-blue-600 hover:bg-blue-500 px-6 rounded-xl transition-all flex items-center justify-center disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <Loader2 size={20} className="animate-spin" />
+                ) : (
+                  <HiOutlineMail size={20} />
+                )}
               </button>
-            </div>
+            </form>
           </div>
         </div>
 
@@ -170,7 +242,8 @@ const Footer = () => {
                 />
               </a>
               <a
-                href="#"
+                href="https://github.com/shamsallabib"
+                target="_blank"
                 className="p-3 bg-white/5 rounded-xl hover:bg-blue-600 transition-all group"
               >
                 <FaGithub
@@ -195,13 +268,22 @@ const Footer = () => {
         <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-widest text-slate-600">
           <div>© {currentYear} KODAWAVE AGENCY. ALL RIGHTS RESERVED.</div>
           <div className="flex gap-8">
-            <Link to="#" className="hover:text-white transition-colors">
+            <Link
+              to="/privacy-policy"
+              className="hover:text-white transition-colors"
+            >
               Privacy
             </Link>
-            <Link to="#" className="hover:text-white transition-colors">
+            <Link
+              to="/terms-of-service"
+              className="hover:text-white transition-colors"
+            >
               Terms
             </Link>
-            <Link to="#" className="hover:text-white transition-colors">
+            <Link
+              to="/refund-policy"
+              className="hover:text-white transition-colors"
+            >
               Sitemap
             </Link>
           </div>

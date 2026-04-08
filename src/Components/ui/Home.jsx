@@ -7,6 +7,7 @@ import Testimonials from "../../Pages/Testimonials";
 import CTA from "../../Pages/CTA";
 import FeatureScroll from "../../Pages/Feature/FeatureScroll";
 import VisualSlider from "../../Pages/VisualSlider/VisualSlider";
+import LegalPolicies from "../../Pages/LegalPolicies/LegalPolicies";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <VisualSlider />
       <WhyChooseUs />
       <Testimonials />
+      <LegalPolicies />
       <CTA />
     </div>
   );

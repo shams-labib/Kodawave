@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react"; // Added useState
 import { ArrowRight, Calendar, Mail } from "lucide-react";
 import Animation from "../Components/shared/Animation";
+import { Link } from "react-router";
+import BookingModal from "../Components/shared/BookingModal";
 
 const CTA = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
@@ -27,13 +31,19 @@ const CTA = () => {
               </p>
 
               <div className="flex flex-wrap justify-center items-center gap-6">
-                <button className="bg-white text-black px-10 py-5 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform active:scale-95 shadow-xl">
+                <button
+                  onClick={() => setIsModalOpen(true)} // Open Modal
+                  className="bg-white text-black px-10 py-5 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition-transform active:scale-95 shadow-xl"
+                >
                   Get Started Now <ArrowRight size={20} />
                 </button>
 
-                <button className="text-white border border-slate-800 px-10 py-5 rounded-full font-bold flex items-center gap-2 hover:bg-white/5 transition-all">
+                <Link
+                  to={"/contact"}
+                  className="text-white border border-slate-800 px-10 py-5 rounded-full font-bold flex items-center gap-2 hover:bg-white/5 transition-all"
+                >
                   <Mail size={18} /> Contact Sales
-                </button>
+                </Link>
               </div>
 
               {/* Trust Badge / Sub-text */}
@@ -51,6 +61,12 @@ const CTA = () => {
           </div>
         </Animation>
       </div>
+
+      {/* Booking Modal */}
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };

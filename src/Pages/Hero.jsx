@@ -1,11 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react"; // Added useState
 import { ArrowRight, Sparkle } from "lucide-react";
 import { gsap } from "gsap";
 import Animation from "../Components/shared/Animation";
+import { Link } from "react-router";
+import BookingModal from "../Components/shared/BookingModal";
 
 const Hero = () => {
   const containerRef = useRef(null);
   const elementsRef = useRef([]);
+
+  // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Human-touch: Parallax & Idle Floating Animation
   useEffect(() => {
@@ -68,12 +73,11 @@ const Hero = () => {
 
   return (
     <section className="bg-[#fafafa] overflow-hidden">
-      {/* Container to maintain max-width and center alignment */}
       <div
         ref={containerRef}
         className="relative max-w-7xl mx-auto min-h-[100dvh] flex items-center justify-center pt-28 pb-20 px-6"
       >
-        {/* Background Grid - Adaptive opacity */}
+        {/* Background Grid */}
         <div
           className="absolute inset-0 z-0 opacity-[0.25]"
           style={{
@@ -106,7 +110,7 @@ const Hero = () => {
             </div>
           </Animation>
 
-          {/* Headline with Fluid Typography */}
+          {/* Headline */}
           <Animation direction="up" delay={0.2}>
             <h1 className="text-[clamp(2.5rem,7vw,5.5rem)] font-black text-[#1a1a1a] leading-[1.05] md:leading-[0.95] tracking-tighter mb-8 px-2">
               Future-ready <br className="hidden sm:block" />
@@ -122,13 +126,16 @@ const Hero = () => {
             </p>
           </Animation>
 
-          {/* Action Buttons - Fully Responsive */}
+          {/* Action Buttons */}
           <Animation
             direction="up"
             delay={0.4}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
           >
-            <button className="w-full sm:w-auto group relative overflow-hidden bg-[#1a1a1a] text-white px-10 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] active:scale-95">
+            <button
+              onClick={() => setIsModalOpen(true)} // Open Modal on Click
+              className="w-full sm:w-auto group relative overflow-hidden bg-[#1a1a1a] text-white px-10 py-4 md:px-12 md:py-5 rounded-full font-bold transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] active:scale-95"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Book a call{" "}
                 <ArrowRight
@@ -139,15 +146,24 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
 
-            <button className="w-full sm:w-auto text-[#1a1a1a] font-bold px-8 py-4 md:py-5 rounded-full border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-all">
+            <Link
+              to={"/services"}
+              className="w-full sm:w-auto text-[#1a1a1a] font-bold px-8 py-4 md:py-5 rounded-full border border-transparent hover:border-slate-200 hover:bg-slate-50 transition-all"
+            >
               Our work
-            </button>
+            </Link>
           </Animation>
         </div>
 
         {/* Subtle Visual Polish */}
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent z-10 pointer-events-none" />
       </div>
+
+      {/* Booking Modal Component */}
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };
