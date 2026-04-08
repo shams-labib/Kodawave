@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, FileText, RefreshCcw, ChevronRight } from "lucide-react";
-import Animation from "../../components/shared/Animation"; // Using your existing GSAP wrapper
+import Animation from "../../Components/shared/Animation";
 
 const POLICIES = [
   {
