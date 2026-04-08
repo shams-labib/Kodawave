@@ -21,7 +21,7 @@ const Footer = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // EmailJS Configuration with your specific keys
+    // EmailJS Configuration with your specific
     const EMAILJS_CONFIG = {
       SERVICE_ID: "service_vyedps4",
       TEMPLATE_ID: "template_gu4xayn",
