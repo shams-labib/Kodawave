@@ -15,7 +15,7 @@ import Animation from "../../Components/shared/Animation";
 const ContactPage = () => {
   const form = useRef();
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null); // 'success' | 'error'
+  const [status, setStatus] = useState(null);
 
   const sendEmail = (e) => {
     e.preventDefault();
