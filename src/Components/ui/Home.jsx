@@ -12,7 +12,6 @@ import LegalPolicies from "../../Pages/LegalPolicies/LegalPolicies";
 const Home = () => {
   return (
     <div>
-      {/* Main */}
       <Hero />
       <ClientLogos />
       <KeyServices />
